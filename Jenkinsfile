@@ -5,7 +5,7 @@ pipeline{
         maven 'maven'
     }
 
-    environment{
+    environment {
        ArtifactId = readMavenPom().getArtifactId()
        Version = readMavenPom().getVersion()
        Name = readMavenPom().getName()
@@ -33,10 +33,10 @@ pipeline{
         // Stage3: Publish the artifacts to Nexus
         stage ('Publish to Nexus'){
             steps {
-                nexusArtifactUploader 
-                artifacts: [
+                nexusArtifactUploader artifacts: 
+                [
                     [
-                        artifactId: 'VinaysDevOpsLab',
+                        artifactId: "${ArtifactId}",
                         classifier: '',
                         file: 'target/VinayDevOpsLab-0.0.4-SNAPSHOT.war',
                         type: 'war'
