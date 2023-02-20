@@ -36,18 +36,18 @@ pipeline{
                 nexusArtifactUploader 
                 artifacts: [
                     [
-                        artifactId: "${ArtifactId}", 
-                        classifier: '', 
+                        artifactId: "${ArtifactId}",
+                        classifier: '',
                         file: 'target/VinayDevOpsLab-0.0.4-SNAPSHOT.war',
                         type: 'war'
                     ]
-                ], 
-                credentialsId: 'bd2ad194-5092-447f-a294-07b862ad25b9', 
-                groupId: "${GroupId}", 
-                nexusUrl: '172.20.10.156:8081', 
-                nexusVersion: 'nexus3', 
-                protocol: 'http', 
-                repository: 'VinaysDevOpsLab-SNAPSHOT', 
+                ],
+                credentialsId: 'bd2ad194-5092-447f-a294-07b862ad25b9',
+                groupId: "${GroupId}",
+                nexusUrl: '172.20.10.156:8081',
+                nexusVersion: 'nexus3',
+                protocol: 'http',
+                repository: 'VinaysDevOpsLab-SNAPSHOT',
                 version: "${Version}"
             }
         }
