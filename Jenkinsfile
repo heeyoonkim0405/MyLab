@@ -30,7 +30,7 @@ pipeline{
                     [
                         artifactId: 'VinayDevOpsLab', 
                         classifier: '', 
-                        file: 'target/VinayDevOpsLab-.0.4-SNAPSHOT.war', type: 'war'
+                        file: 'target/VinayDevOpsLab-0.0.4-SNAPSHOT.war', type: 'war'
                     ]
                 ], 
                 credentialsId: 'bd2ad194-5092-447f-a294-07b862ad25b9', 
@@ -39,7 +39,7 @@ pipeline{
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'VinaysDevOpsLab-SNAPSHOT', 
-                version: '.0.4-SNAPSHOT'
+                version: '0.0.4-SNAPSHOT'
             }
         }
 
