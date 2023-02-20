@@ -38,7 +38,7 @@ pipeline{
                     [
                         artifactId: "${ArtifactId}", 
                         classifier: '', 
-                        file: "target/${ArtifactId}-${Version}.war",
+                        file: 'target/VinayDevOpsLab-0.0.4-SNAPSHOT.war',
                         type: 'war'
                     ]
                 ], 
