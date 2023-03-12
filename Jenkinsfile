@@ -55,7 +55,7 @@ pipeline{
                     version: "${Version}"
                 }
             }
-        }
+        }      
 
         // Stage4 : Print some information
         stage ('Print Environment variables'){
@@ -67,11 +67,32 @@ pipeline{
             }
         }
 
-
         // Stage5 : Publish the source code to Sonarqube
         stage ('Deploy'){
             steps {
                 echo ' deploying......'
+                sshPublisher(publishers: 
+                [sshPublisherDesc(
+                    configName: 'Ansible_Controller', 
+                    transfers: 
+                    [sshTransfer(
+                        cleanRemote: false, 
+                        excludes: '', 
+                        execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy.yaml -i /opt/playbooks/hosts', 
+                        execTimeout: 120000, 
+                        flatten: false, 
+                        makeEmptyDirs: false, 
+                        noDefaultExcludes: false, 
+                        patternSeparator: '[, ]+', 
+                        remoteDirectory: '', 
+                        remoteDirectorySDF: false, 
+                        removePrefix: '', sourceFiles: ''
+                        )
+                    ], 
+                    usePromotionTimestamp: false, 
+                    useWorkspaceInPromotion: false, 
+                    verbose: false)
+                ])
             }
         }
     }
