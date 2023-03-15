@@ -67,7 +67,9 @@ pipeline{
             }
         }
 
-        // Stage5 : Publish the source code to Sonarqube
+        // Stage5 :
+        //  - Login to Ansible Controller over SSH (from Jenkins)
+        //  - Run the playbook from Ansible Controller to download the source code to Tomcat server.
         stage ('Deploy'){
             steps {
                 echo ' deploying......'
@@ -79,6 +81,38 @@ pipeline{
                         cleanRemote: false, 
                         excludes: '', 
                         execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy.yaml -i /opt/playbooks/hosts', 
+                        execTimeout: 120000, 
+                        flatten: false, 
+                        makeEmptyDirs: false, 
+                        noDefaultExcludes: false, 
+                        patternSeparator: '[, ]+', 
+                        remoteDirectory: '', 
+                        remoteDirectorySDF: false, 
+                        removePrefix: '', sourceFiles: ''
+                        )
+                    ], 
+                    usePromotionTimestamp: false, 
+                    useWorkspaceInPromotion: false, 
+                    verbose: false)
+                ])
+            }
+        }
+        // Stage6 :
+        //  - Login to Ansible Controller over SSH (from Jenkins)
+        //  - Run the playbook from Ansible Controller to 
+        //      - download the latest war file to Docker host
+        //      - create Dockerfile,Build Image and run Docker Container
+        stage ('Deploy'){
+            steps {
+                echo ' deploying......'
+                sshPublisher(publishers: 
+                [sshPublisherDesc(
+                    configName: 'Ansible_Controller', 
+                    transfers: 
+                    [sshTransfer(
+                        cleanRemote: false, 
+                        excludes: '', 
+                        execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy_docker.yaml -i /opt/playbooks/hosts', 
                         execTimeout: 120000, 
                         flatten: false, 
                         makeEmptyDirs: false, 
