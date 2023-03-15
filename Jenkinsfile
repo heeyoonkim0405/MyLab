@@ -70,7 +70,7 @@ pipeline{
         // Stage5 :
         //  - Login to Ansible Controller over SSH (from Jenkins)
         //  - Run the playbook from Ansible Controller to download the source code to Tomcat server.
-        stage ('Deploy'){
+        stage ('Deploy to tomcat'){
             steps {
                 echo ' deploying......'
                 sshPublisher(publishers: 
@@ -80,7 +80,7 @@ pipeline{
                     [sshTransfer(
                         cleanRemote: false, 
                         excludes: '', 
-                        execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy.yaml -i /opt/playbooks/hosts', 
+                        execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy_as_tomcat_user.yaml -i /opt/playbooks/hosts', 
                         execTimeout: 120000, 
                         flatten: false, 
                         makeEmptyDirs: false, 
@@ -102,7 +102,7 @@ pipeline{
         //  - Run the playbook from Ansible Controller to 
         //      - download the latest war file to Docker host
         //      - create Dockerfile,Build Image and run Docker Container
-        stage ('Deploy Docker'){
+        stage ('Deploy to Docker'){
             steps {
                 echo ' deploying......'
                 sshPublisher(publishers: 
