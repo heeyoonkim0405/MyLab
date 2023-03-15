@@ -102,7 +102,7 @@ pipeline{
         //  - Run the playbook from Ansible Controller to 
         //      - download the latest war file to Docker host
         //      - create Dockerfile,Build Image and run Docker Container
-        stage ('Deploy'){
+        stage ('Deploy Docker'){
             steps {
                 echo ' deploying......'
                 sshPublisher(publishers: 
