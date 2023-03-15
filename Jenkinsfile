@@ -66,7 +66,7 @@ pipeline{
                 echo "Name is '${Name}'"
             }
         }
-
+/*
         // Stage5 :
         //  - Login to Ansible Controller over SSH (from Jenkins)
         //  - Run the playbook from Ansible Controller to download the source code to Tomcat server.
@@ -97,6 +97,7 @@ pipeline{
                 ])
             }
         }
+*/
         // Stage6 :
         //  - Login to Ansible Controller over SSH (from Jenkins)
         //  - Run the playbook from Ansible Controller to 
